@@ -2,7 +2,7 @@
 TextView部分文本设置不同的样式
 
 ## 截图
-![images](https://github.com/Wiser-Wong/SpanText/blob/master/images/spanText.png)
+![images](https://github.com/Wiser-Wong/SpanText/blob/master/images/screenshot.png)
 
 ## 操作指南
 * 添加完整文本，然后修改其中文本样式
