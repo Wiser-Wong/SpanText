@@ -250,9 +250,11 @@ class SpanController {
              */
             fun addImage(
                 context: Context?,
-                resId: Int
+                resId: Int,
+                isImageCenter: Boolean = false,
+                drawable: Drawable? = null
             ): SpanBuilder {
-                insertImage(context, resId, spanStrBuilder?.length ?: 0)
+                insertImage(context, resId, spanStrBuilder?.length ?: 0, isImageCenter, drawable)
                 return this
             }
 
@@ -267,8 +269,10 @@ class SpanController {
                 targetSection: String?,
                 context: Context?,
                 color: Int,
+                isImageCenter: Boolean = false,
+                drawable: Drawable? = null
             ): SpanBuilder {
-                return insertImage(targetSection, context, color, false, Which.LAST)
+                return insertImage(targetSection, context, color, false, isImageCenter, drawable, Which.LAST)
             }
 
             /**
@@ -283,6 +287,8 @@ class SpanController {
                 context: Context?,
                 color: Int,
                 ignoreCase: Boolean,
+                isImageCenter: Boolean = false,
+                drawable: Drawable? = null,
                 which: Which?
             ): SpanBuilder {
                 return onDecor(
@@ -291,7 +297,7 @@ class SpanController {
                     which,
                     object : DecorCallback {
                         override fun decor(start: Int, end: Int) {
-                            insertImage(context, color, end)
+                            insertImage(context, color, end, isImageCenter, drawable)
                         }
                     })
             }

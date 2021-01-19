@@ -3,13 +3,14 @@ package com.wiser.spantext
 import android.graphics.BlurMaskFilter
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // TextView SpanStringBuilder在小米8 小米9 SE 部分手机针对连续中文符号这种情况下，会将一行的右边界处的多余文本截取，估计是小米修改了API导致的
+
+        val drawable: Drawable =
+            resources.getDrawable(R.mipmap.apple)
+        drawable.setBounds(
+            0,
+            0,
+            100,
+            100
+        )
+
         SpanController.create()
             .addSection("我同意logn(xy)《中国移动认证服务条款》、 《用户服务协议》、 《用户隐私协议》、 《个人信息保护政策》、 《关注中央人民广播电视》并授权XXXXXXX使用您的本机号码，您的反馈是我们最大的帮助")
             .setSubSection("logn") // 下标
@@ -31,10 +44,7 @@ class MainActivity : AppCompatActivity() {
             .setStyleSection(Typeface.BOLD_ITALIC, 26, 28)
             .setURLSection("服", "https://www.baidu.com") // 链接
             .setURLSection("https://www.baidu.com", 30, 32)
-            .setTypefaceSection(
-                "隐私",
-                Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf")
-            ) // 特殊字体
+            .setTypefaceSection("隐私", Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf")) // 特殊字体
             .setTypefaceSection(Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf"), 36, 38)
             .setMaskSection("个人", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID)) // 模糊
             .setMaskSection(BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID), 40, 42)
@@ -69,9 +79,10 @@ class MainActivity : AppCompatActivity() {
                 101
             )
             .insertTypefaceSection(
-                "特殊字体",
-                "护",
-                Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf")
+                "特殊字体", "护", Typeface.createFromAsset(
+                    assets,
+                    "hyzhengyuan_85w.ttf"
+                )
             )
             .insertMaskSection("模糊阴影", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID), 111)
             .insertMaskSection("模糊阴影", "关注", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID))
@@ -81,10 +92,8 @@ class MainActivity : AppCompatActivity() {
             .insertBackColor("后置背景", "广播", Color.MAGENTA)
             .setAlign(Layout.Alignment.ALIGN_CENTER) // 对齐方式
             .insertImage(this, R.mipmap.apple, 3) // 插入图片
-            .insertImage("本机", this, R.mipmap.apple)
+            .insertImage("本机", this, R.mipmap.apple,true,drawable)
             .showText(tv_content1)
-
-        // TextView SpanStringBuilder在小米8 小米9 SE 部分手机针对连续中文符号这种情况下，会将一行的右边界处的多余文本截取，估计是小米修改了API导致的
 
         SpanController.create()
             .addSection("我同意")
@@ -146,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             .addStyleSection("号码", Typeface.BOLD_ITALIC)
             .addTypefaceSection("，您的", Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf"))
             .addMaskSection("反馈是我们最大的帮助", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID))
-            .addImage(this, R.mipmap.apple) // 添加图片
+            .addImage(this, R.mipmap.apple, true, drawable) // 添加图片
             .showText(tv_content2)
     }
 }
