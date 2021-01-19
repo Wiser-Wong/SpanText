@@ -73,17 +73,8 @@ class MainActivity : AppCompatActivity() {
             .insertStyleSection("字体风格", "个人", Typeface.BOLD_ITALIC)
             .insertURLSection("URL", "https://www.baidu.com", 86)
             .insertURLSection("URL", "信息", "https://www.baidu.com")
-            .insertTypefaceSection(
-                "特殊字体",
-                Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf"),
-                101
-            )
-            .insertTypefaceSection(
-                "特殊字体", "护", Typeface.createFromAsset(
-                    assets,
-                    "hyzhengyuan_85w.ttf"
-                )
-            )
+            .insertTypefaceSection("特殊字体", Typeface.createFromAsset(assets, "hyzhengyuan_85w.ttf"),101)
+            .insertTypefaceSection("特殊字体", "护", Typeface.createFromAsset(assets,"hyzhengyuan_85w.ttf"))
             .insertMaskSection("模糊阴影", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID), 111)
             .insertMaskSection("模糊阴影", "关注", BlurMaskFilter(10f, BlurMaskFilter.Blur.SOLID))
             .insertForeColor("前置背景", Color.YELLOW, 116)
@@ -98,47 +89,32 @@ class MainActivity : AppCompatActivity() {
         SpanController.create()
             .addSection("我同意")
             .addForeColorSection(null, Color.RED)
-            .addForeColorSection(
-                "《中国移动认证服务条款》",
-                Color.BLUE,
-                object : SpanController.OnClickSpanListener {
+            .addForeColorSection("《中国移动认证服务条款》",Color.BLUE,object : SpanController.OnClickSpanListener {
                     override fun onClickSpan(view: View) {
                         Toast.makeText(this@MainActivity, "点击《中国移动认证服务条款》", Toast.LENGTH_LONG)
                             .show()
                     }
                 })
             .addSection("、 ")
-            .addForeColorSection(
-                "《用户服务协议》",
-                Color.RED,
-                object : SpanController.OnClickSpanListener {
+            .addForeColorSection("《用户服务协议》",Color.RED,object : SpanController.OnClickSpanListener {
                     override fun onClickSpan(view: View) {
                         Toast.makeText(this@MainActivity, "点击《用户服务协议》", Toast.LENGTH_LONG).show()
                     }
                 })
             .addSection("、 ")
-            .addForeColorSection(
-                "《用户隐私协议》",
-                Color.YELLOW,
-                object : SpanController.OnClickSpanListener {
+            .addForeColorSection("《用户隐私协议》", Color.YELLOW,object : SpanController.OnClickSpanListener {
                     override fun onClickSpan(view: View) {
                         Toast.makeText(this@MainActivity, "点击《用户隐私协议》", Toast.LENGTH_LONG).show()
                     }
                 })
             .addSection("、 ")
-            .addForeColorSection(
-                "《个人信息保护政策》",
-                Color.GREEN,
-                object : SpanController.OnClickSpanListener {
+            .addForeColorSection("《个人信息保护政策》",Color.GREEN,object : SpanController.OnClickSpanListener {
                     override fun onClickSpan(view: View) {
                         Toast.makeText(this@MainActivity, "点击《个人信息保护政策》", Toast.LENGTH_LONG).show()
                     }
                 })
             .addSection("、 ")
-            .addBackColorSection(
-                "《关注中央人民广播电视》",
-                Color.MAGENTA,
-                object : SpanController.OnClickSpanListener {
+            .addBackColorSection("《关注中央人民广播电视》", Color.MAGENTA,object : SpanController.OnClickSpanListener {
                     override fun onClickSpan(view: View) {
                         Toast.makeText(this@MainActivity, "点击《关注中央人民广播电视》", Toast.LENGTH_LONG)
                             .show()
